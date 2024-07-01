@@ -2,8 +2,8 @@
 #include<fstream>
 #include<cstring>
 using namespace std;
-const int Max = 20; //quantidade m�xima de caracteres para o nome do personagem
-const int n = 60; //quantidade m�xima de personagens
+const int Max = 20; //quantidade máxima de caracteres para o nome do personagem
+const int n = 60; //quantidade máxima de personagens
 
 struct championsLol
 {
@@ -83,25 +83,22 @@ void cadastrarCampeao()
     cin >> champ.funcao;
 }
 
-char buscarCampeao(championsLol[])
+string buscarCampeao(championsLol champ[60])
 {
-    championsLol champ;
     char nomeBusca[20];
     cout << "Digite o nome do personagem que deseja buscar: ";
     cin >> nomeBusca;
 
     for (int i = 0; i < Max; i++)
     {
-        if (champ[i].nome == nomeBusca)
-            return champ[i];
+        if (champ[i].nome == nomeBusca) return champ[i].nome;
     }
 }
 
-void editarNomeCampeao(championsLol[])
+void editarNomeCampeao(championsLol champ[60])
 {
-    championsLol champ;
     char novoNome[20];
-    buscarCampeao(champ[]);
+    buscarCampeao(champ);
     cout << "Digite o novo nome do personagem: ";
     cin >> novoNome;
 
@@ -135,7 +132,7 @@ int main()
             fout << "nome,altura,forca,raça,função\n";
             for(int i=0; i<j; i++)
                 if(c[i].altura>200)
-                    fout << p[i].nome << "," << p[i].altura << "," << p[i].inteligencia << "," << p[i].forca << "," << p[i].velocidade << "," << p[i].habilidade << endl;
+                    fout << c[i].nome << "," << c[i].altura << "," << c[i].forca << "," << c[i].funcao << "," << c[i].raca << endl;
             fout.close();
         }
         else
