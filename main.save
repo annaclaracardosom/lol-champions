@@ -2,8 +2,8 @@
 #include<fstream>
 #include<cstring>
 using namespace std;
-const int Max = 20; //quantidade m·xima de caracteres para o nome do personagem
-const int n = 60; //quantidade m·xima de personagens
+const int Max = 20; //quantidade m√°xima de caracteres para o nome do personagem
+const int n = 60; //quantidade m√°xima de personagens
 
 struct championsLol
 {
@@ -33,9 +33,9 @@ void imprime_champions(championsLol c[], int tam)
 
         cout << i+1 << " - " << c[i].nome << endl;
         cout << "Altura: " << c[i].altura << endl;
-        cout << "ForÁa: " << c[i].forca << endl;
-        cout << "RaÁa: " << c[i].raca << endl;
-        cout << "FunÁ„o: " << c[i].funcao << endl << endl;
+        cout << "For√ßa: " << c[i].forca << endl;
+        cout << "Ra√ßa: " << c[i].raca << endl;
+        cout << "Fun√ß√£o: " << c[i].funcao << endl << endl;
 
         system("pause");
     }
@@ -72,13 +72,13 @@ void cadastrarCampeao()
     cout << "Altura: ";
     cin >> championsLol.altura;
 
-    cout << "ForÁa: ";
+    cout << "For√ßa: ";
     cin >> championsLol.forca;
 
-    cout << "RaÁa: ";
+    cout << "Ra√ßa: ";
     cin >> championsLol.raca;
 
-    cout << "FunÁ„o: ";
+    cout << "Fun√ß√£o: ";
     cin >> championsLol.funcao;
 }
 
@@ -116,7 +116,7 @@ int main()
         int j=0;
         char buff[Max];
 
-        fin.getline(buff, Max); // ignora a primeira linha do arquivo (cabeÁalho)
+        fin.getline(buff, Max); // ignora a primeira linha do arquivo (cabe√ßalho)
         while(fin.getline(buff, Max))
         {
             carrega_registro(buff, c[j]);
@@ -129,19 +129,19 @@ int main()
 
         if(fout.is_open())
         {
-            fout << "nome,altura,forca,raÁa,funÁ„o\n";
+            fout << "nome,altura,forca,ra√ßa,fun√ß√£o\n";
             for(int i=0; i<j; i++)
                 if(c[i].altura>200)
                     fout << p[i].nome << "," << p[i].altura << "," << p[i].inteligencia << "," << p[i].forca << "," << p[i].velocidade << "," << p[i].habilidade << endl;
             fout.close();
         }
         else
-            cout << "N„o conseguiu abrir o arquivo de saÌda!";
+            cout << "N√£o conseguiu abrir o arquivo de sa√≠da!";
 
         fin.close();
     }
     else
-        cout << "N„o conseguiu abrir o arquivo de entrada!";
+        cout << "N√£o conseguiu abrir o arquivo de entrada!";
 
     return 0;
 }
