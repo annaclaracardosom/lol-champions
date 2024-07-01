@@ -2,8 +2,8 @@
 #include<fstream>
 #include<cstring>
 using namespace std;
-const int Max = 20; //quantidade máxima de caracteres para o nome do personagem
-const int n = 60; //quantidade máxima de personagens
+const int Max = 20; //quantidade mï¿½xima de caracteres para o nome do personagem
+const int n = 60; //quantidade mï¿½xima de personagens
 
 struct championsLol
 {
@@ -33,9 +33,9 @@ void imprime_champions(championsLol c[], int tam)
 
         cout << i+1 << " - " << c[i].nome << endl;
         cout << "Altura: " << c[i].altura << endl;
-        cout << "Força: " << c[i].forca << endl;
-        cout << "Raça: " << c[i].raca << endl;
-        cout << "Função: " << c[i].funcao << endl << endl;
+        cout << "Forï¿½a: " << c[i].forca << endl;
+        cout << "Raï¿½a: " << c[i].raca << endl;
+        cout << "Funï¿½ï¿½o: " << c[i].funcao << endl << endl;
 
         system("pause");
     }
@@ -72,13 +72,13 @@ void cadastrarCampeao()
     cout << "Altura: ";
     cin >> championsLol.altura;
 
-    cout << "Força: ";
+    cout << "Forï¿½a: ";
     cin >> championsLol.forca;
 
-    cout << "Raça: ";
+    cout << "Raï¿½a: ";
     cin >> championsLol.raca;
 
-    cout << "Função: ";
+    cout << "Funï¿½ï¿½o: ";
     cin >> championsLol.funcao;
 }
 
@@ -116,7 +116,7 @@ int main()
         int j=0;
         char buff[Max];
 
-        fin.getline(buff, Max); // ignora a primeira linha do arquivo (cabeçalho)
+        fin.getline(buff, Max); // ignora a primeira linha do arquivo (cabeï¿½alho)
         while(fin.getline(buff, Max))
         {
             carrega_registro(buff, c[j]);
@@ -129,19 +129,167 @@ int main()
 
         if(fout.is_open())
         {
-            fout << "nome,altura,forca,raça,função\n";
+            fout << "nome,altura,forca,raï¿½a,funï¿½ï¿½o\n";
             for(int i=0; i<j; i++)
                 if(c[i].altura>200)
                     fout << p[i].nome << "," << p[i].altura << "," << p[i].inteligencia << "," << p[i].forca << "," << p[i].velocidade << "," << p[i].habilidade << endl;
             fout.close();
         }
         else
-            cout << "Não conseguiu abrir o arquivo de saída!";
+            cout << "Nï¿½o conseguiu abrir o arquivo de saï¿½da!";
 
         fin.close();
     }
     else
-        cout << "Não conseguiu abrir o arquivo de entrada!";
+        cout << "Nï¿½o conseguiu abrir o arquivo de entrada!";
+
+    return 0;
+}
+
+#include<iostream>
+#include<fstream>
+#include<cstring>
+using namespace std;
+const int Max = 20; //quantidade mÃ¡xima de caracteres para o nome do personagem
+const int n = 60; //quantidade mÃ¡xima de personagens
+
+struct championsLol
+{
+    char nome[Max], raca;
+    int altura;
+    int forca;
+    char funcao;
+};
+
+void substring(char buff[Max], char aux[Max], int &i, char delim)
+{
+    int k = 0;
+    while(buff[i] != delim)
+    {
+        aux[k] = buff[i];
+        i++;
+        k++;
+    }
+    aux[k] = '\0';
+    i++;
+}
+
+void imprime_champions(championsLol c[], int tam)
+{
+    for(int i=0; i<tam; i++)
+    {
+
+        cout << i+1 << " - " << c[i].nome << endl;
+        cout << "Altura: " << c[i].altura << endl;
+        cout << "ForÃ§a: " << c[i].forca << endl;
+        cout << "RaÃ§a: " << c[i].raca << endl;
+        cout << "FunÃ§Ã£o: " << c[i].funcao << endl << endl;
+
+        system("pause");
+    }
+}
+
+void carrega_registro(char buff[Max], championsLol &l)
+{
+    char aux[Max];
+    int i=0;
+
+    substring(buff, aux, i, ',');
+    strcpy(l.nome, aux);
+
+    substring(buff, aux, i, ',');
+    l.altura=atoi(aux);
+
+    substring(buff, aux, i, ',');
+    l.forca=atoi(aux);
+
+    substring(buff, aux, i, ',');
+    l.raca=atoi(aux);
+
+    substring(buff, aux, i, '\0');
+    l.funcao=atoi(aux);
+}
+
+void cadastrarCampeao()
+{
+    cout << "Cadastro de personagem\n";
+
+    cout << "Nome: ";
+    cin >> championsLol.nome;
+
+    cout << "Altura: ";
+    cin >> championsLol.altura;
+
+    cout << "ForÃ§a: ";
+    cin >> championsLol.forca;
+
+    cout << "RaÃ§a: ";
+    cin >> championsLol.raca;
+
+    cout << "FunÃ§Ã£o: ";
+    cin >> championsLol.funcao;
+}
+
+char buscarCampeao(championsLol[])
+{
+    char nomeBusca[20];
+    cout << "Digite o nome do personagem que deseja buscar: ";
+    cin >> nomeBusca;
+
+    for (int i = 0; i < Max; i++)
+    {
+        if (championsLol[i].nome == nomeBusca)
+            return championsLol[i];
+    }
+}
+
+void editarNomeCampeao(championsLol[])
+{
+    char novoNome[20];
+    buscarCampeao(championsLol[]);
+    cout << "Digite o novo nome do personagem: ";
+    cin >> novoNome;
+    
+}
+
+int main()
+{
+    championsLol c[60];
+    setlocale(LC_ALL, "Portuguese");
+
+    ifstream fin("lolChampions.csv");
+
+    if(fin.is_open())
+    {
+        int j=0;
+        char buff[Max];
+
+        fin.getline(buff, Max); // ignora a primeira linha do arquivo (cabeÃ§alho)
+        while(fin.getline(buff, Max))
+        {
+            carrega_registro(buff, c[j]);
+            j++;
+        }
+
+        imprime_champions(c, j);
+
+        ofstream fout("Personagens_Marvel_acima2m.csv");
+
+        if(fout.is_open())
+        {
+            fout << "nome,altura,forca,raÃ§a,funÃ§Ã£o\n";
+            for(int i=0; i<j; i++)
+                if(c[i].altura>200)
+                    fout << p[i].nome << "," << p[i].altura << "," << p[i].inteligencia << "," << p[i].forca << "," << p[i].velocidade << "," << p[i].habilidade << endl;
+            fout.close();
+        }
+        else
+            cout << "NÃ£o conseguiu abrir o arquivo de saÃ­da!";
+
+        fin.close();
+    }
+    else
+        cout << "NÃ£o conseguiu abrir o arquivo de entrada!";
 
     return 0;
 }
