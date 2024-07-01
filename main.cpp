@@ -73,13 +73,13 @@ void cadastrarCampeao()
     cout << "Altura: ";
     cin >> champ.altura;
 
-    cout << "For�a: ";
+    cout << "Força: ";
     cin >> champ.forca;
 
-    cout << "Ra�a: ";
+    cout << "Raça: ";
     cin >> champ.raca;
 
-    cout << "Fun��o: ";
+    cout << "Função: ";
     cin >> champ.funcao;
 }
 
@@ -132,14 +132,14 @@ int main()
 
         if(fout.is_open())
         {
-            fout << "nome,altura,forca,ra�a,fun��o\n";
+            fout << "nome,altura,forca,raça,função\n";
             for(int i=0; i<j; i++)
                 if(c[i].altura>200)
                     fout << p[i].nome << "," << p[i].altura << "," << p[i].inteligencia << "," << p[i].forca << "," << p[i].velocidade << "," << p[i].habilidade << endl;
             fout.close();
         }
         else
-            cout << "N�o conseguiu abrir o arquivo de sa�da!";
+            cout << "Não conseguiu abrir o arquivo de saída!";
 
         fin.close();
     }
