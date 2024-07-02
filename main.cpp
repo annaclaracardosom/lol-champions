@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -15,6 +16,12 @@ struct Campeao
     int forca;
     char funcao;
 };
+
+void carrega_tela_operacoes() {
+    cout << "Selecione uma das operações para manipular a lista de campeões:" << endl;
+    cout << "         CADASTRAR [1] | BUSCAR [2] | DELETAR [3]\n\n\n\n" << endl;
+    cout << "ENCERRAR [4]\n";
+}
 
 void substring(char buff[Max], char aux[Max], int &i, char delim)
 {
@@ -83,7 +90,6 @@ int busca_campeao(Campeao c[60])
     cin >> nomeBusca;
 
     for(int i = 0; i < Max; i++) {
-        return 
         if(c[i].nome == nomeBusca) return i;
     }
 }
@@ -102,8 +108,22 @@ int main()
 
     ifstream fin("lolchampions.csv");
 
-    if(fin.is_open())
+    while(fin.is_open())
     {
+        int op;
+        carrega_tela_operacoes();
+        cin >> op;
+        
+        switch (op)
+        {
+        case 1: cadastra_campeao(); break;
+        case 2: busca_campeao(); break;
+        case 3: 
+
+            break;
+        default: fin.close();
+            break;
+        }
         int j=0;
         char buff[Max];
 
@@ -129,10 +149,7 @@ int main()
             fout.close();
         }
         else cout << "Não conseguiu abrir o arquivo de saída!";
-
-        fin.close();
     }
-    else cout << "Não conseguiu abrir o arquivo de entrada!";
  
     return 0;
 }
