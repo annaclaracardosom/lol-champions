@@ -5,15 +5,14 @@
 
 using namespace std;
 
-const int Max = 99; //quantidade máxima de caracteres para o nome do personagem
+const int Max = 20; //quantidade máxima de caracteres para o nome do personagem
 const int n = 60; //quantidade máxima de personagens
 
 struct Campeao
 {
-    char nome[Max], raca;
+    char nome[Max], raca[Max], funcao[Max];
     int altura;
     int forca;
-    char funcao;
 };
 
 int menuOpcoes()
@@ -69,9 +68,9 @@ void carrega_registro(char buff[Max], Campeao &c)
 
     substring(buff, aux, i, ','); c.forca=atoi(aux);
 
-    substring(buff, aux, i, ','); c.raca=atoi(aux);
+    substring(buff, aux, i, ','); strcpy(c.raca, aux);
 
-    substring(buff, aux, i, '\0'); c.funcao=atoi(aux);
+    substring(buff, aux, i, '\0'); strcpy(c.funcao, aux);
 }
 
 void troca(&forca1, &forca2)
