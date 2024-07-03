@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const int Max = 20; //quantidade máxima de caracteres para o nome do personagem
+const int Max = 99; //quantidade máxima de caracteres para o nome do personagem
 const int n = 60; //quantidade máxima de personagens
 
 struct Campeao
@@ -16,24 +16,32 @@ struct Campeao
     char funcao;
 };
 
-void carrega_tela_operacoes() {
-    cout << "Selecione uma das operações para manipular a lista de campeões:" << endl;
-    cout << "         CADASTRAR [1] | BUSCAR [2] | DELETAR [3]\n\n\n\n" << endl;
-    cout << "ENCERRAR [4]\n";
+int menuOpcoes()
+{
+    int op;
+    cout << "Menu de opções" << endl;
+    cout << "Pressione a tecla correspondente à  opção escolhida" << endl;
+    cout << "1 - Buscar um champion pelo nome" << endl;
+    cout << "2 - Ordenar champions por força, em ordem crescente" << endl;
+    cout << "3 - Editar nome do champion" << endl;
+    cout << "4 - Deletar champion" << endl;
+    cout << "0 - Sair" << endl;
+    cin >> op;
+    return op;
 }
 
-// void substring(char buff[Max], char aux[Max], int &i, char delim)
-// {
-//     int k = 0;
-//     while(buff[i] != delim)
-//     {
-//         aux[k] = buff[i];
-//         i++;
-//         k++;
-//     }
-//     aux[k] = '\0';
-//     i++;
-// }
+void substring(char buff[Max], char aux[Max], int &i, char delim)
+{
+    int k = 0;
+    while(buff[i] != delim)
+    {
+        aux[k] = buff[i];
+        i++;
+        k++;
+    }
+    aux[k] = '\0';
+    i++;
+}
 
 void imprime_campeoes(Campeao c[], int tam)
 {
@@ -102,14 +110,14 @@ void cadastra_campeao()
     cout << "Função: "; cin >> c.funcao;
 }
 
-int busca_campeao(Campeao c[60])
+void busca_campeao(Campeao c[60])
 {
     char nomeBusca[20];
     cout << "Digite o nome do personagem que deseja buscar: ";
     cin >> nomeBusca;
 
     for(int i = 0; i < Max; i++) {
-        if(c[i].nome == nomeBusca) return i;
+        if(c[i].nome == nomeBusca) carrega_registro();
     }
 }
 
@@ -128,18 +136,12 @@ int main()
     ifstream fin("lolchampions.csv");
 
     while(fin.is_open())
-    {
-        int op;
-        carrega_tela_operacoes();
-        cin >> op;
-        
-        switch (op)
+    {   
+        switch (menuOpcoes)
         {
         case 1: cadastra_campeao(); break;
         case 2: busca_campeao(); break;
-        case 3: 
-
-            break;
+        case 3: edita_nome_campeao(); break;
         default: fin.close();
             break;
         }
@@ -155,7 +157,7 @@ int main()
 
         imprime_campeoes(c, j);
 
-        ofstream fout("Personagens_Marvel_acima2m.csv");
+        ofstream fout("lolchampions.csv");
 
         if(fout.is_open())
         {
