@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
-#include <stdlib.h>
 
 using namespace std;
 
@@ -23,18 +22,18 @@ void carrega_tela_operacoes() {
     cout << "ENCERRAR [4]\n";
 }
 
-void substring(char buff[Max], char aux[Max], int &i, char delim)
-{
-    int k = 0;
-    while(buff[i] != delim)
-    {
-        aux[k] = buff[i];
-        i++;
-        k++;
-    }
-    aux[k] = '\0';
-    i++;
-}
+// void substring(char buff[Max], char aux[Max], int &i, char delim)
+// {
+//     int k = 0;
+//     while(buff[i] != delim)
+//     {
+//         aux[k] = buff[i];
+//         i++;
+//         k++;
+//     }
+//     aux[k] = '\0';
+//     i++;
+// }
 
 void imprime_campeoes(Campeao c[], int tam)
 {
@@ -65,6 +64,26 @@ void carrega_registro(char buff[Max], Campeao &c)
     substring(buff, aux, i, ','); c.raca=atoi(aux);
 
     substring(buff, aux, i, '\0'); c.funcao=atoi(aux);
+}
+
+void troca(&forca1, &forca2)
+{
+    int aux;
+    aux = forca1;
+    forca1 = forca2;
+    forca2 = aux;
+}
+
+void ordenarPorForca(Campeao c[60])
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n-1; j++)
+        {
+            if (c[i].forca > c[i + 1].forca)
+                troca(c[i].forca, c[i + 1].forca);
+        }
+    }
 }
 
 void cadastra_campeao()
