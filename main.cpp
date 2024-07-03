@@ -2,11 +2,18 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <stdlib.h>
 
 using namespace std;
 
 const int Max = 20; //quantidade máxima de caracteres para o nome do personagem
 const int n = 60; //quantidade máxima de personagens
+
+/*
+    Descrição: Trabalho sobre arquivo csv com tema dos champions (personagens) do jogo League of Legends
+    Data: 02/07/24
+    Integrantes: Airon Gabriel Pereira de Oliveira, Anna Clara Cardoso Martins, Bianca Karen Dias Oliveira
+*/
 
 struct Campeao
 {
@@ -29,6 +36,7 @@ int menuOpcoes()
     return op;
 }
 
+// separa as colunas por meio do delimitador as converte em objeto da classe campeão
 void substring(char buff[Max], char aux[Max], int &i, char delim)
 {
     int k = 0;
@@ -57,8 +65,10 @@ void imprime_campeoes(Campeao c[], int tam)
     }
 }
 
-void carrega_registro(char buff[Max], Campeao &c)
+// separa as colunas por meio do delimitador as converte em objeto da classe campeão
+Campeao carrega_registro(char buff[Max])
 {
+    Campeao c;
     char aux[Max];
     int i=0;
 
@@ -71,9 +81,11 @@ void carrega_registro(char buff[Max], Campeao &c)
     substring(buff, aux, i, ','); strcpy(c.raca, aux);
 
     substring(buff, aux, i, '\0'); strcpy(c.funcao, aux);
+
+    return c;
 }
 
-void troca(&forca1, &forca2)
+void troca(int forca1, int forca2)
 {
     int aux;
     aux = forca1;
@@ -116,7 +128,10 @@ void busca_campeao(Campeao c[60])
     cin >> nomeBusca;
 
     for(int i = 0; i < Max; i++) {
-        if(c[i].nome == nomeBusca) carrega_registro();
+        if(c[i].nome == nomeBusca)
+            cout << "|     Nome     |     Altura     |      Força     |     Raça     |     Função     |\n";
+            cout << c[i].nome << "     " << c[i].altura << "     " << c[i].forca << "     " << c[i].raca << "     "  << c[i].funcao;
+
     }
 }
 
@@ -136,7 +151,7 @@ int main()
 
     while(fin.is_open())
     {   
-        switch (menuOpcoes)
+        switch (int op = menuOpcoes())
         {
         case 1: cadastra_campeao(); break;
         case 2: busca_campeao(); break;
@@ -150,7 +165,7 @@ int main()
         fin.getline(buff, Max); // ignora a primeira linha do arquivo (cabeçalho)
         while(fin.getline(buff, Max))
         {
-            carrega_registro(buff, c[j]);
+            c[j] = carrega_registro(buff);
             j++;
         }
 
