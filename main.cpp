@@ -131,15 +131,20 @@ void busca_campeao(Campeao c[60])
         if(c[i].nome == nomeBusca)
             cout << "|     Nome     |     Altura     |      Força     |     Raça     |     Função     |\n";
             cout << c[i].nome << "     " << c[i].altura << "     " << c[i].forca << "     " << c[i].raca << "     "  << c[i].funcao;
-
     }
 }
 
-void edita_nome_campeao(Campeao c[60])
+int edita_nome_campeao(Campeao c[60])
 {
+
     char novoNome[20];
     cout << "Digite o novo nome do personagem: ";
     cin >> novoNome;
+    int i;
+    for(i = 0; i < Max; i++) {
+        if(c[i].nome == novoNome) strcpy(c[i].nome, novoNome);
+    }
+    return i;
 }
 
 int main()
@@ -153,9 +158,9 @@ int main()
     {   
         switch (int op = menuOpcoes())
         {
-        case 1: cadastra_campeao(); break;
-        case 2: busca_campeao(); break;
-        case 3: edita_nome_campeao(); break;
+        case 1: busca_campeao(c); break;
+        case 2: ordenarPorForca(c); break;
+        case 3: edita_nome_campeao(c); break;
         default: fin.close();
             break;
         }
